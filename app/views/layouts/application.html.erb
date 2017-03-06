@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ImDemo</title>
-    <%= csrf_meta_tags %>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>IMDemo</title>
+  <%= csrf_meta_tags %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <%= link_to 'IMDemo', root_path, class: 'navbar-brand' %>
+  <% if user_signed_in? %>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+      </li>
+    </ul>
+    <span class="navbar-text">Logged in as <strong><%= current_user.name %></strong></span>
+
+  <% end %>
+</nav>
+
+
+<div class="container">
+  <%= yield %>
+</div>
+
+<footer>
+  <div class="container">
+    <p class="text-muted">Created by <%= link_to 'Hongli', 'http://hlyu.cn' %></p>
+  </div>
+</footer>
+</body>
 </html>
